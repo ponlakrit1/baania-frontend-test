@@ -55,7 +55,7 @@
                 </div>
                 <hr/>
                 <div class="post-code-panel">
-                    <span>SELECT POST CODE</span>
+                    <p>SELECT POST CODE</p>
                     <select class="form-control select-option-custom" [(ngModel)]="selectedPostCode" (change)="onChangePostCode()">
                         <option *ngFor="let opt of postCodeList.payload" [value]="opt.post_code">
                             {{ opt.post_code }} 
@@ -79,7 +79,9 @@
 
 <ng-template #houseModal let-modal>
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">House</h4>
+        <h4 class="modal-title" id="modal-basic-title">
+            {{ mode == "I" ? "Create" : formObj.name }}
+        </h4>
     </div>
     <div class="modal-body">
         <form [formGroup]="formGroup">
@@ -110,8 +112,8 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-fill" (click)="modal.dismiss('Cancle click')">CANCEL</button>
+        <button type="button" class="btn btn-custom btn-fill" (click)="modal.dismiss('Cancle click')">CANCEL</button>
         <button type="button" class="btn btn-success-custom btn-fill" (click)="onClickSave()" *ngIf="mode == 'I'">CREATE</button>
-        <button type="button" class="btn btn-success-custom btn-fill" (click)="onClickUpdate()" *ngIf="mode == 'U'">UPDATE</button>
+        <button type="button" class="btn btn-warning-custom btn-fill" (click)="onClickUpdate()" *ngIf="mode == 'U'">UPDATE</button>
     </div>
 </ng-template>

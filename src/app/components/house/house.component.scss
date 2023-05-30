@@ -35,6 +35,10 @@ td {
     flex-direction: row;
 }
 
+.btn-custom {
+    border: 1px solid gray;
+}
+
 .btn-info-custom {
     background-color: $info-custom-color;
     color: #FFF;
@@ -42,6 +46,11 @@ td {
 
 .btn-success-custom {
     background-color: $success-custom-color;
+    color: #FFF;
+}
+
+.btn-warning-custom {
+    background-color: $warning-custom-color;
     color: #FFF;
 }
 
