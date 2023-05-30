@@ -22,18 +22,18 @@
                     </div>
                     <div class="col-md-5 col-sm-12"></div>
                     <div class="col-md-2 col-sm-12">
-                        <button type="button" class="btn btn-success-custom btn-fill">CREATE</button>
+                        <button type="button" class="btn btn-success-custom btn-fill" (click)="openCreateHouseModal()">CREATE</button>
                     </div>
                 </div>
                 <div class="content table-responsive table-full-width">
                     <table class="table table-hover table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">ID</th>
+                                <th scope="col" style="width:10%;">ID</th>
                                 <th scope="col">Name</th>
-                                <th scope="col">Post code</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Action</th>
+                                <th scope="col" style="width:20%;">Post code</th>
+                                <th scope="col" style="width:20%;">Price</th>
+                                <th scope="col" style="width:20%;">Action</th>
                             </tr>
                         </thead>
                         <tbody *ngFor="let data of dataList.payload | slice: (page-1) * pageSize : page * pageSize">
@@ -41,34 +41,100 @@
                             <td>{{ data.name }}</td>
                             <td>{{ data.post_code }}</td>
                             <td>{{ data.price }}</td>
-                            <td style="width:20%;">
-                                <button type="button" class="btn btn-warning-sm-custom btn-outline">VIEW DETAIL</button>
+                            <td>
+                                <button type="button" class="btn btn-warning-sm-custom btn-outline" (click)="openUpdateHouseModal(data)">VIEW DETAIL</button>
                                 &nbsp;
                                 <button type="button" class="btn btn-danger-sm-custom btn-outline">DELETE</button>
                             </td>
                         </tbody>
                     </table>
                     <div class="paging-custom">
+                        <div></div>
                         <ngb-pagination [collectionSize]="dataSize" [(page)]="page" [pageSize]="pageSize" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
                     </div>
                 </div>
                 <hr/>
                 <div class="post-code-panel">
-                    <select class="form-control select-option-custom">
-                        <option value="" disabled selected>SELECT POST CODE</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
+                    <p>SELECT POST CODE</p>
+                    <select class="form-control select-option-custom" [(ngModel)]="selectedPostCode" (change)="onChangePostCode()">
+                        <option *ngFor="let opt of postCodeList.payload" [value]="opt.post_code">
+                            {{ opt.post_code }} 
+                        </option>
                     </select>
-                    <b class="avg-text">
-                        Average: 
-                    </b>
-                    <b class="avg-text">
-                        Median: 
-                    </b>
+                    <div *ngIf="average || median">
+                        <br/>
+                        <b class="avg-text">
+                            Average: {{ average }}
+                        </b>
+                        <br/>
+                        <b class="avg-text">
+                            Median: {{ median }}
+                        </b>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<ng-template #houseModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">House</h4>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="formGroup">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    Name
+                    <input type="text" class="form-control" name="nameCtrl" formControlName="nameCtrl" [(ngModel)]="formObj.name" />
+                    <span class="ng-invalid" *ngIf="formGroup.controls['nameCtrl'].invalid && (formGroup.controls['nameCtrl'].dirty || formGroup.controls['nameCtrl'].touched)">* Required</span>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                    Price
+                    <input type="number" class="form-control" name="priceCtrl" formControlName="priceCtrl" [(ngModel)]="formObj.price" />
+                    <span class="ng-invalid" *ngIf="formGroup.controls['priceCtrl'].invalid && (formGroup.controls['priceCtrl'].dirty || formGroup.controls['priceCtrl'].touched)">* Required</span>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                    Post code
+                    <input type="text" class="form-control" name="postCodeCtrl" formControlName="postCodeCtrl" [(ngModel)]="formObj.post_code" />
+                    <span class="ng-invalid" *ngIf="formGroup.controls['postCodeCtrl'].invalid && (formGroup.controls['postCodeCtrl'].dirty || formGroup.controls['postCodeCtrl'].touched)">* Required</span>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    Description
+                    <textarea class="form-control" name="descCtrl" formControlName="descCtrl" [(ngModel)]="formObj.desc" ></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-fill" (click)="modal.dismiss('Cancle click')">CANCEL</button>
+        <button type="button" class="btn btn-success-custom btn-fill" (click)="onClickSave()" *ngIf="mode == 'I'">CREATE</button>
+        <button type="button" class="btn btn-success-custom btn-fill" (click)="onClickUpdate()" *ngIf="mode == 'U'">UPDATE</button>
+    </div>
+</ng-template>
+
+<ng-template #confirmModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Confirm</h4>
+    </div>
+    <div class="modal-body">
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-fill" (click)="modal.dismiss('Cancle click')"><i class="fa fa-times"></i>&nbsp;CANCEL</button>
+        <button type="button" class="btn btn-success-custom btn-fill" (click)="onClickSave()" *ngIf="mode == 'I'">DELETE</button>
+    </div>
+</ng-template>
+
+<ng-template #alertModal let-modal>
+    <div class="modal-body">
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-fill" (click)="modal.dismiss('Cancle click')"><i class="fa fa-times"></i>&nbsp;CANCEL</button>
+        <button type="button" class="btn btn-success-custom btn-fill" (click)="onClickSave()" *ngIf="mode == 'I'">DELETE</button>
+    </div>
+</ng-template>

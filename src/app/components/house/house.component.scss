@@ -30,9 +30,9 @@ td {
 
 .paging-custom {
     display: flex;
-    justify-content: center;
-    align-items: end;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-direction: row;
 }
 
 .btn-info-custom {
@@ -46,13 +46,13 @@ td {
 }
 
 .btn-danger-sm-custom {
-    background-color: #FDF4F7;
+    background-color: #FDF4F7 !important;
     color: $danger-custom-color;
     font-size: 12px;
 }
 
 .btn-warning-sm-custom {
-    background-color: #FFF7E6;
+    background-color: #FFF7E6 !important;
     color: $warning-custom-color;
     font-size: 12px;
 }
@@ -61,6 +61,6 @@ td {
     color: $info-custom-color;
 }
 
-ngb-pagination ::ng-deep ul > li.active > a {
-    background-color: $info-custom-color !important;
+.ng-invalid:not(form)  {
+    color: $danger-custom-color;
 }

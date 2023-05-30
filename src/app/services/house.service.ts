@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, ReplaySubject } from 'rxjs';
-import { ROOT_URL } from '../utils/config';
 import { HouseModel } from '../models/house.model';
 
 @Injectable({
@@ -17,24 +16,24 @@ export class HouseService {
     return this.http.get(url + "/home?skip=" + skip + "&take=" + take);
   }
 
-  create(req: HouseModel) {
-    return this.http.post(ROOT_URL + "/home/", req, { responseType: 'json', headers: this.headers });
+  create(url: string, req: HouseModel) {
+    return this.http.post(url + "/home/", req, { responseType: 'json', headers: this.headers });
   }
 
-  update(req: HouseModel) {
-    return this.http.patch(ROOT_URL + "/home/"+req.id, req, { responseType: 'json', headers: this.headers });
+  update(url: string, req: HouseModel) {
+    return this.http.patch(url + "/home/"+req.id, req, { responseType: 'json', headers: this.headers });
   }
 
-  delete(req: HouseModel) {
-    return this.http.delete(ROOT_URL + "/home/"+req.id);
+  delete(url: string, req: HouseModel) {
+    return this.http.delete(url + "/home/"+req.id);
   }
 
-  findPostCode(): Observable<any>{
-    return this.http.get(ROOT_URL + "/postCode/");
+  findPostCode(url: string): Observable<any>{
+    return this.http.get(url + "/postCode/");
   }
 
-  findPostCodeById(id: number): Observable<any>{
-    return this.http.get(ROOT_URL + "/postCode/" + id);
+  findPostCodeById(url: string, id: string): Observable<any>{
+    return this.http.get(url + "/postCode/" + id);
   }
 
 }

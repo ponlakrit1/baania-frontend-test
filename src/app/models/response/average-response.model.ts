@@ -1,6 +1,6 @@
 import { AverageModel } from "../average.model";
 
-export class PostCodeResponseModel {
+export class AverageResponseModel {
     public payload: AverageModel;
     
     constructor() {
