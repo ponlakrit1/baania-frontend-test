@@ -55,7 +55,7 @@
                 </div>
                 <hr/>
                 <div class="post-code-panel">
-                    <p>SELECT POST CODE</p>
+                    <span>SELECT POST CODE</span>
                     <select class="form-control select-option-custom" [(ngModel)]="selectedPostCode" (change)="onChangePostCode()">
                         <option *ngFor="let opt of postCodeList.payload" [value]="opt.post_code">
                             {{ opt.post_code }} 

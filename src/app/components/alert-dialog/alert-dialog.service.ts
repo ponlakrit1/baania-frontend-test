@@ -13,11 +13,13 @@ export class AlertDialogService {
   public alert(
     status: boolean,
     message: string,
+    description: string,
     btnText: string = 'CONTINUE',
     dialogSize: 'sm'|'lg' = 'sm'): Promise<boolean> {
     const modalRef = this.modalService.open(AlertDialogComponent, { size: dialogSize });
     modalRef.componentInstance.status = status;
     modalRef.componentInstance.message = message;
+    modalRef.componentInstance.description = description;
     modalRef.componentInstance.btnText = btnText;
 
     return modalRef.result;

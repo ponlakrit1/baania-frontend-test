@@ -146,12 +146,12 @@ export class HouseComponent implements OnInit {
 
         this.formObj = new HouseModel();
 
-        this.alertDialogService.alert(true, "Create a Successful!");
+        this.alertDialogService.alert(true, "Success", "Create a Successful!", 'CONTINUE');
         this.initLoad();
       },
       err => {
         console.log(err);
-        this.alertDialogService.alert(false, "Let's try one more again");
+        this.alertDialogService.alert(false, "Fail", "Let's try one more again", 'TRY AGAIN');
       }
     );
   }
@@ -168,12 +168,12 @@ export class HouseComponent implements OnInit {
 
         this.formObj = new HouseModel();
 
-        this.alertDialogService.alert(true, "Update a Successful!");
+        this.alertDialogService.alert(true, "Success", "Update a Successful!", 'CONTINUE');
         this.initLoad();
       },
       err => {
         console.log(err);
-        this.alertDialogService.alert(false, "Let's try one more again");
+        this.alertDialogService.alert(false, "Fail", "Let's try one more again", 'TRY AGAIN');
       }
     );
   }
@@ -207,12 +207,12 @@ export class HouseComponent implements OnInit {
       res => {
         this.modalService.dismissAll();
         
-        this.alertDialogService.alert(true, "Delete a Successful!");
+        this.alertDialogService.alert(true, "Success", "Delete a Successful!", 'CONTINUE');
         this.initLoad();
       },
       err => {
         console.log(err);
-        this.alertDialogService.alert(false, "Let's try one more again");
+        this.alertDialogService.alert(false, "Fail", "Let's try one more again", 'TRY AGAIN');
       }
     );
   }

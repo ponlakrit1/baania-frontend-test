@@ -8,8 +8,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class AlertDialogComponent implements OnInit {
 
-  @Input() staus: boolean;
+  @Input() status: boolean;
   @Input() message: string;
+  @Input() description: string;
   @Input() btnText: string;
 
   constructor(private activeModal: NgbActiveModal) { }
