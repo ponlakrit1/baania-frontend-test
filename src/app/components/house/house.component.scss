@@ -1,6 +1,18 @@
+$blue-light-color: #F4F7FC;
+
+$info-custom-color:    #3C64B1;
+$success-custom-color: #22BB66;
+$danger-custom-color:  #DB99A9;
+$warning-custom-color: #FFAA2B;
+
+td {
+    border-width: 1px;
+    padding: 10px;
+}
+
 .backgroud-custom {
     padding: 20px 0px 20px 0px;
-    background-color: #F4F7FC;
+    background-color: $blue-light-color;
 }
 
 .post-code-panel {
@@ -9,10 +21,46 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #F4F7FC;
+    background-color: $blue-light-color;
 }
 
 .select-option-custom {
     width: 30%;
 }
 
+.paging-custom {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    flex-direction: column;
+}
+
+.btn-info-custom {
+    background-color: $info-custom-color;
+    color: #FFF;
+}
+
+.btn-success-custom {
+    background-color: $success-custom-color;
+    color: #FFF;
+}
+
+.btn-danger-sm-custom {
+    background-color: #FDF4F7;
+    color: $danger-custom-color;
+    font-size: 12px;
+}
+
+.btn-warning-sm-custom {
+    background-color: #FFF7E6;
+    color: $warning-custom-color;
+    font-size: 12px;
+}
+
+.avg-text {
+    color: $info-custom-color;
+}
+
+ngb-pagination ::ng-deep ul > li.active > a {
+    background-color: $info-custom-color !important;
+}

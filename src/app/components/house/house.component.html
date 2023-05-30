@@ -12,7 +12,7 @@
                         <input type="text" class="form-control" [(ngModel)]="rootPort"/>
                     </div>
                     <div class="col-md-2 col-sm-12 mt-auto">
-                        <button type="button" class="btn btn-info btn-fill">CONNECT</button>
+                        <button type="button" class="btn btn-info-custom btn-fill">CONNECT</button>
                     </div>
                 </div>
                 <hr/>
@@ -22,7 +22,7 @@
                     </div>
                     <div class="col-md-5 col-sm-12"></div>
                     <div class="col-md-2 col-sm-12">
-                        <button type="button" class="btn btn-success btn-fill">CREATE</button>
+                        <button type="button" class="btn btn-success-custom btn-fill">CREATE</button>
                     </div>
                 </div>
                 <div class="content table-responsive table-full-width">
@@ -36,35 +36,37 @@
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
-                        <tbody *ngFor="let data of dataList.payload | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let i = index">
+                        <tbody *ngFor="let data of dataList.payload | slice: (page-1) * pageSize : page * pageSize">
                             <td>{{ data.id }}</td>
                             <td>{{ data.name }}</td>
                             <td>{{ data.post_code }}</td>
                             <td>{{ data.price }}</td>
                             <td style="width:20%;">
-                                <button type="button" class="btn btn-sm btn-outline-warning">VIEW DETAIL</button>
-                                <button type="button" class="btn btn-sm btn-outline-danger">DELETE</button>
+                                <button type="button" class="btn btn-warning-sm-custom btn-outline">VIEW DETAIL</button>
+                                &nbsp;
+                                <button type="button" class="btn btn-danger-sm-custom btn-outline">DELETE</button>
                             </td>
                         </tbody>
                     </table>
-                    <div class="row center">
-                        <ngb-pagination [collectionSize]="dataSize" [(page)]="page" [maxSize]="pageSize" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+                    <div class="paging-custom">
+                        <ngb-pagination [collectionSize]="dataSize" [(page)]="page" [pageSize]="pageSize" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
                     </div>
                 </div>
                 <hr/>
                 <div class="post-code-panel">
                     <select class="form-control select-option-custom">
+                        <option value="" disabled selected>SELECT POST CODE</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
                     </select>
-                    <p>
+                    <b class="avg-text">
                         Average: 
-                    </p>
-                    <p>
+                    </b>
+                    <b class="avg-text">
                         Median: 
-                    </p>
+                    </b>
                 </div>
             </div>
         </div>

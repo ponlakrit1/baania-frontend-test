@@ -18,7 +18,7 @@ export class HouseComponent implements OnInit {
   private skip: number = 0;
   private take: number = 100;
   public  page: number = 1;
-  public  pageSize: number = 10;
+  public  pageSize: number = 5;
   public  dataSize: number = 0;
 
   constructor(private houseService: HouseService) {
