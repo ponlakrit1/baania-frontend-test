@@ -7,6 +7,7 @@ import { HouseModel } from 'src/app/models/house.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PostCodeResponseModel } from 'src/app/models/response/postcode-response.model';
 import { AverageResponseModel } from 'src/app/models/response/average-response.model';
+import { ConfirmationDialogService } from './../../components/confirm-dialog/confirm-dialog.service';
 
 @Component({
   selector: 'app-house',
@@ -41,7 +42,8 @@ export class HouseComponent implements OnInit {
 
   constructor(private houseService: HouseService, 
               private formBuilder: FormBuilder,
-              private modalService: NgbModal) {
+              private modalService: NgbModal,
+              private confirmationDialogService: ConfirmationDialogService) {
     this.rootURL = ROOT_URL;
     this.rootPort = ROOT_PORT;
 
@@ -163,6 +165,31 @@ export class HouseComponent implements OnInit {
       (res: AverageResponseModel) => {
         this.average = res.payload.average;
         this.median = res.payload.median;
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  onClickDelete(data: HouseModel) {
+    this.confirmationDialogService.confirm('Confirm', 'Are you sure you want to delete this item?')
+    .then((confirmed: boolean) => {
+      if (confirmed) {
+        this.deleteHouse(data);
+      }
+    })
+    .catch(() => {
+      console.log("delete error");
+    });
+  }
+
+  async deleteHouse(data: HouseModel) {
+    await this.houseService.delete(this.getRootServiceURL(), data).subscribe(
+      res => {
+        this.modalService.dismissAll();
+        
+        this.initLoad();
       },
       err => {
         console.log(err);

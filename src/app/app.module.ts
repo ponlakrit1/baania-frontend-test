@@ -8,10 +8,14 @@ import { AppComponent } from './app.component';
 import { HouseComponent } from './components/house/house.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { ConfirmationDialogService } from './components/confirm-dialog/confirm-dialog.service';
+
 @NgModule({
   declarations: [
     AppComponent,
-    HouseComponent
+    HouseComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +25,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     NgbModule
   ],
-  providers: [],
+  providers: [
+    ConfirmationDialogService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
