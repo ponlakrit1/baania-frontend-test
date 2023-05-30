@@ -115,26 +115,3 @@
         <button type="button" class="btn btn-success-custom btn-fill" (click)="onClickUpdate()" *ngIf="mode == 'U'">UPDATE</button>
     </div>
 </ng-template>
-
-<ng-template #confirmModal let-modal>
-    <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Confirm</h4>
-    </div>
-    <div class="modal-body">
-
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-fill" (click)="modal.dismiss('Cancle click')"><i class="fa fa-times"></i>&nbsp;CANCEL</button>
-        <button type="button" class="btn btn-success-custom btn-fill" (click)="onClickSave()" *ngIf="mode == 'I'">DELETE</button>
-    </div>
-</ng-template>
-
-<ng-template #alertModal let-modal>
-    <div class="modal-body">
-
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-fill" (click)="modal.dismiss('Cancle click')"><i class="fa fa-times"></i>&nbsp;CANCEL</button>
-        <button type="button" class="btn btn-success-custom btn-fill" (click)="onClickSave()" *ngIf="mode == 'I'">DELETE</button>
-    </div>
-</ng-template>

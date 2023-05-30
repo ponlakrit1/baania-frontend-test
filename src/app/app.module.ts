@@ -10,12 +10,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { ConfirmationDialogService } from './components/confirm-dialog/confirm-dialog.service';
+import { AlertDialogComponent } from './components/alert-dialog/alert-dialog.component';
+import { AlertDialogService } from './components/alert-dialog/alert-dialog.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     HouseComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    AlertDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,8 @@ import { ConfirmationDialogService } from './components/confirm-dialog/confirm-d
     NgbModule
   ],
   providers: [
-    ConfirmationDialogService
+    ConfirmationDialogService,
+    AlertDialogService
   ],
   bootstrap: [AppComponent]
 })

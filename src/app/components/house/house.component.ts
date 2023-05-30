@@ -8,6 +8,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PostCodeResponseModel } from 'src/app/models/response/postcode-response.model';
 import { AverageResponseModel } from 'src/app/models/response/average-response.model';
 import { ConfirmationDialogService } from './../../components/confirm-dialog/confirm-dialog.service';
+import { AlertDialogService } from './../../components/alert-dialog/alert-dialog.service';
 
 @Component({
   selector: 'app-house',
@@ -40,10 +41,13 @@ export class HouseComponent implements OnInit {
   public average: number;
   public median: number;
 
+  public alertMsg: string;
+
   constructor(private houseService: HouseService, 
               private formBuilder: FormBuilder,
               private modalService: NgbModal,
-              private confirmationDialogService: ConfirmationDialogService) {
+              private confirmationDialogService: ConfirmationDialogService,
+              private alertDialogService: AlertDialogService) {
     this.rootURL = ROOT_URL;
     this.rootPort = ROOT_PORT;
 
@@ -101,19 +105,27 @@ export class HouseComponent implements OnInit {
     );
   }
 
+  openModal(modal: any, size: string) {
+    this.modalService.open(modal, {size: size});
+  }
+
+  getErrorAlert() {
+    
+  }
+
   openCreateHouseModal() {
     this.mode = "I";
 
     this.resetForm();
     this.formObj = new HouseModel();
-    this.modalService.open(this.houseModal, {size: 'lg'});
+    this.openModal(this.houseModal, 'lg');
   }
 
   openUpdateHouseModal(data: HouseModel) {
     this.mode = "U";
 
     this.formObj = JSON.parse(JSON.stringify(data));
-    this.modalService.open(this.houseModal, {size: 'lg'});
+    this.openModal(this.houseModal, 'lg');
   }
 
   resetForm() {
@@ -133,10 +145,13 @@ export class HouseComponent implements OnInit {
         this.modalService.dismissAll();
 
         this.formObj = new HouseModel();
+
+        this.alertDialogService.alert(true, "Create a Successful!");
         this.initLoad();
       },
       err => {
         console.log(err);
+        this.alertDialogService.alert(false, "Let's try one more again");
       }
     );
   }
@@ -152,10 +167,13 @@ export class HouseComponent implements OnInit {
         this.modalService.dismissAll();
 
         this.formObj = new HouseModel();
+
+        this.alertDialogService.alert(true, "Update a Successful!");
         this.initLoad();
       },
       err => {
         console.log(err);
+        this.alertDialogService.alert(false, "Let's try one more again");
       }
     );
   }
@@ -189,10 +207,12 @@ export class HouseComponent implements OnInit {
       res => {
         this.modalService.dismissAll();
         
+        this.alertDialogService.alert(true, "Delete a Successful!");
         this.initLoad();
       },
       err => {
         console.log(err);
+        this.alertDialogService.alert(false, "Let's try one more again");
       }
     );
   }
