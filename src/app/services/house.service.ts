@@ -13,8 +13,8 @@ export class HouseService {
 
   constructor(private http: HttpClient) { }
 
-  findSkipAndTake(skip: number, take: number): Observable<any>{
-    return this.http.get(ROOT_URL + "/home?skip=" + skip + "&take=" + take);
+  findSkipAndTake(url: string, skip: number, take: number): Observable<any>{
+    return this.http.get(url + "/home?skip=" + skip + "&take=" + take);
   }
 
   create(req: HouseModel) {
